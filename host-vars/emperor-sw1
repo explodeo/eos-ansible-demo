@@ -1,0 +1,49 @@
+---
+hostname: sub-1
+
+eos_host_ip: 
+
+vlans:
+  - vlanid: 1
+    name: default
+  - vlanid: 2
+    name: local
+
+interfaces:
+  config:
+    - name: Loopback0
+      enable: true
+    - name: Ethernet1
+      description: "Example ETH1"
+      enable: true
+    - name: Ethernet2
+      description: "Example ETH2"
+      enable: true
+    - name: Ethernet3
+      description: "Example ETH3"
+      enable: true
+    - name: Ethernet4
+      description: "Example ETH4"
+      enable: true
+    - name: Management1
+      description: "management interface"
+      enable: true
+
+eos_ospfv3:
+  config:
+    processes:      
+        address_family:
+          - afi: "ipv6"
+            auto_cost:
+              reference_bandwidth: 1024
+            bfd: true
+            ip_params:
+              - afi: "ipv6"
+                network: "point-to-point"
+                dead_interval: 75
+                bfd: true
+                encryption_v3:
+                  - algorithm: sha1
+                    encryption: aes-256-cbc
+                    key: "{{ OSPFv3_AES_KEY['content'] }}"
+                    keytype: 0

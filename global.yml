@@ -1,0 +1,4 @@
+---
+- include: subsystems/CORE.yml
+- include: subsystems/SUBSYSTEM1.yml
+- include: subsystems/SUBSYSTEM2.yml

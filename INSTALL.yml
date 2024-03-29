@@ -1,0 +1,18 @@
+---
+name: Load Switch Keys and Provision Switches
+tasks:
+  - name:
+    mount:
+      path: /mnt
+      src: /dev/sr0
+      fstype: iso9660
+      opts: ro,noauto
+      state: mounted
+
+  - name: Load OSPFv3 AES Key into variable
+    slurp:
+      src: /mnt/ospfv3.key
+    register: OSPFv3_AES_KEY
+
+
+include: global.yml
